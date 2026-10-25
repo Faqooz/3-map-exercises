@@ -1,5 +1,5 @@
 package part02;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,13 +24,21 @@ public class MapExperts {
      * You can assume that all letters are in lower case and that the given word
      * contains only letters.
      */
+
     public Map<Character, Integer> countLetters(String word) {
+
+        Map<Character,Integer>CountOfLetters = new HashMap<>();
+        
+        for(char letter: word.toCharArray() ){
+            CountOfLetters.put(letter, CountOfLetters.getOrDefault(letter,0)+1);//lisäätään 1 aina tuohon counteriin arvoon. ,0 jotta jos vastaavaa arvoa ei ole, käytetään 0 null sijasta. sitten 0+1 on 1
+        }//get palauttaa parin arvon
+        
         /*
          * Hint: you can get the characters of a String using either the charAt() method
          * or the toCharArray() method. charAt() returns a single character and
          * toCharArray() returns an array of characters.
          */
-        return null;
+        return CountOfLetters;
     }
 
     /**
@@ -42,6 +50,12 @@ public class MapExperts {
      * { 1 -> "one", 2 -> "two", 3 -> "three" }
      */
     public Map<Integer, String> reverseMap(Map<String, Integer> map) {
+
+        Map<Integer, String> reversedMap = new HashMap<>();
+
+        for (Map.Entry<String, Integer> entryX : map.entrySet()) {
+        reversedMap.put(entryX.getValue(), entryX.getKey()); //for loop etsitään kaikki arvoparit mapista. jokaisen parin arvo ja avain tallennetaan uuteen reversedMappiin. ELI: 1. etsi arvopari alkuperöisestö kartasta. Tallenna arvopari käännettynä uuteen karttaan jotta käänteinen hakukin onnistuu.
+    }//tässä tehtävässä siis entry ja entryset. olisi hyvä että tässä olisi esim. milloin entry ja entryset tarvitaan, vaikka ostoslista!
         /*
          * The keys of a map are always unique, so we can't have two keys with the same
          * value. However, there is no such restriction for the values of a map:
@@ -52,7 +66,7 @@ public class MapExperts {
          * can choose any of the keys to be the value of the reversed map. So either
          * { 1 -> "apples" } or { 1 -> "oranges" } will be accepted.
          */
-        return null;
+        return reversedMap;
     }
 
     /**
@@ -70,6 +84,11 @@ public class MapExperts {
      * "SOF004AS2A" -> Course("SOF004AS2A", "Python-ohjelmointi")
      */
     public Map<String, Course> createMapFromList(List<Course> list) {
+        Map<String, Course> KurssiMap = new HashMap<>(); //käytetään Course Objekteja arvoina
+        for (Course Kurssi : list){
+            KurssiMap.put(Kurssi.code(), Kurssi);
+        }
+
         /*
          * Each Course object has a code and a name. You can access them using the
          * code() and name() methods:
@@ -77,6 +96,6 @@ public class MapExperts {
          * String code = course.code();
          * String name = course.name(); // you won't need this in the exercise
          */
-        return null;
+        return KurssiMap;
     }
 }
