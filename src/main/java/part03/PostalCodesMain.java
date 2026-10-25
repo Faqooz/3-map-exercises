@@ -29,6 +29,8 @@ public class PostalCodesMain {
      * "00100" whether the user enters "helsinki" or "HELSINKI".
      */
     public static void main(String[] args) {
+
+
         /*
          * This map contains data that is read from the JSON file. You don't need to
          * inspect the file handling in this exercise, but you can if you want to.
@@ -43,7 +45,25 @@ public class PostalCodesMain {
         String answer = scanner.nextLine(); // answer may be a postal code or a postal district name
 
         // TODO: Implement your logic here
+        if (postalCodes.containsKey(answer)) {
+            System.out.println(postalCodes.get(answer));//jos avain löytyy, tulostetaan sen arvo.
+        } else {
+            Map<String, String> matchingCodes = new TreeMap<>();
 
+            for (Map.Entry<String, String> entry : postalCodes.entrySet()) {
+                if (entry.getValue().equalsIgnoreCase(answer)) {
+                    matchingCodes.put(entry.getKey(), entry.getValue());
+                }
+            }
+
+            if (matchingCodes.isEmpty()) {
+                System.out.println("No results found.");
+            } else {
+                for (String code : matchingCodes.keySet()) {
+                    System.out.println(code);
+                }
+            }
+        }
         scanner.close();
     }
 }
